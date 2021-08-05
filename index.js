@@ -51,7 +51,7 @@ const getWeather = async query => {
   //var description = data.weather[0].description - GOT RIDE OF
   //var actualTemp = temp
   //var feelsLikeTemp = feels_like
-  const place = data.name + ", " + data.sys.country;
+  const place = `${data.name}, ${data.sys.country}`;
   // create JS date object from Unix timestamp
   updatedAt = new Date(timestamp * 1000);
   return {
@@ -95,7 +95,7 @@ const displayWeatherInfo = (weatherObj) => {
   // map link element based on lat/long
   const whereLink = document.createElement('a')
   whereLink.textContent = "Click to view map"
-  whereLink.href = "https://www.google.com/maps/search/?api=1&query=" + weatherObj.coords
+  whereLink.href = `https://www.google.com/maps/search/?api=1&query=${weatherObj.coords}`
   whereLink.target = "__BLANK"
   weatherContainer.appendChild(whereLink)
 
@@ -114,29 +114,24 @@ const displayWeatherInfo = (weatherObj) => {
 
   // current temperature
   const temp = document.createElement('p')
-  temp.textContent = "Current: " +
-    weatherObj.actualTemp +
-    "° F"
+  temp.textContent = `Current: ${weatherObj.actualTemp}° F`
   weatherContainer.appendChild(temp)
 
   // "feels like" temperature
   const feelsLikeTemp = document.createElement('p')
-  feelsLikeTemp.textContent = "Feels like: " +
-    weatherObj.feelsLikeTemp +
-    "° F"
+  feelsLikeTemp.textContent = `Feels like: ${weatherObj.feelsLikeTemp}° F`
   weatherContainer.appendChild(feelsLikeTemp)
 
   addBreak()
 
   // time weather was last updated
   const updatedAt = document.createElement('p')
-  updatedAt.textContent = "Last updated: " +
-    weatherObj.updatedAt.toLocaleTimeString(
-      'en-US',
-      {
-        hour: 'numeric',
-        minute: '2-digit'
-      }
-    )
+  updatedAt.textContent = `Last updated: ${weatherObj.updatedAt.toLocaleTimeString(
+    'en-US',
+    {
+      hour: 'numeric',
+      minute: '2-digit'
+    }
+  )}`
   weatherContainer.appendChild(updatedAt)
 }
